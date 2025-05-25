@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
-// import { FiChevronRight } from "react-icons/fi";
-// import { FiChevronLeft } from "react-icons/fi";
-// import { Navbar } from './components/Navbar';
+import { useEffect } from 'react'; 
 import { Footer } from '../components/Footer';
 import Carousel from 'react-slick';
 import Slider from 'react-slick';
@@ -123,7 +120,6 @@ function Home () {
         ))}
       </Slider>
     
- 
     {/* hero section ending */}
     
     {/* about section  */}
