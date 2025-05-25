@@ -33,7 +33,7 @@ export const Service = () => {
         breakpoint: 768,
         settings: {
           slidesToShow: 1.2,
-          centerPadding: "20px",
+          centerPadding: "21px",
         },
       },
       {

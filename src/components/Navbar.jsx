@@ -5,38 +5,37 @@ import nav2 from '../assets/navImg2.png';
 import nav3 from '../assets/navImg3.png';
 import nav4 from '../assets/navImg4.png';
 import nav5 from '../assets/navImg5.png';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 export const Navbar = () => {
+  const [scrollShow, setScrollShow] = useState(true);
+  const [nav, setNav] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const lastScrollY = useRef(0);
 
-  // scrolling navbar display true and false 
-  const [scrollShow , setScrollshow] = useState(false);
+  const displayNav = () => setNav(!nav);
+  const toggleDropdown = (name) => {
+    setOpenDropdown(openDropdown === name ? null : name);
+  };
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-  
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-  
-      if (currentScrollY < lastScrollY) {
-        // scrolling up
-        setScrollshow(true);
-      } else {
-        // scrolling down
-        setScrollshow(false);
+
+      if (currentScrollY < lastScrollY.current) {
+        setScrollShow(true); // scrolling up
+      } else if (currentScrollY > lastScrollY.current + 10) {
+        setScrollShow(false); // scrolling down
       }
-  
-      lastScrollY = currentScrollY;
+
+      lastScrollY.current = currentScrollY;
     };
-  
+
     window.addEventListener('scroll', handleScroll);
-  
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
 
   const NavItems = [
     { name: 'Home', link: '/' },
@@ -55,21 +54,13 @@ export const Navbar = () => {
     { name: 'Contact Us', link: '/contact' },
   ];
 
-  const [nav, setNav] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null);
-
-  const displayNav = () => setNav(!nav);
-  const toggleDropdown = (name) => {
-    setOpenDropdown(openDropdown === name ? null : name);
-  };
-
   return (
-<header
-  className={`sticky top-0 w-full z-50 transition-transform duration-300 transform ${
-    scrollShow ? 'translate-y-0' : '-translate-y-full'
-  } bg-white md:flex justify-between items-center lg:h-[96px] h-[70px] px-[20px] py-[20px] md:px-[100px] md:py-[48px] shadow-lg`}
->
-          <span className="flex items-center justify-between w-full md:w-auto">
+    <header
+      className={`sticky top-0 z-50 transition-transform duration-300 ${
+        scrollShow ? 'translate-y-0' : '-translate-y-full'
+      } bg-white md:flex justify-between items-center lg:h-[96px] h-[70px] px-[20px] py-[20px] md:px-[100px] md:py-[48px] shadow-lg`}
+    >
+      <span className="flex items-center justify-between w-full md:w-auto">
         <Link to="/">
           <img src={Logo} className="w-[120px] md:w-[150px]" alt="logo" />
         </Link>
@@ -87,11 +78,11 @@ export const Navbar = () => {
               <NavLink
                 to={item.link}
                 className={({ isActive }) =>
-                  
-                  `${isActive ? 'text-activeColor' : 'text-navColor'}
-                  text-[16px] font-[600] font-manRope hover:text-activeColor transition-all
-                  ${item.name === 'Contact Us' ? 'bg-[#ED2625] text-white py-3 px-5 rounded-[8px] hover:text-white hover:bg-[#ED2625]' : ''}
-                  `
+                  `${isActive ? 'text-activeColor' : 'text-navColor'} text-[16px] font-[600] font-manRope hover:text-activeColor transition-all ${
+                    item.name === 'Contact Us'
+                      ? 'bg-[#ED2625] text-white py-3 px-5 rounded-[8px] hover:text-white hover:bg-[#ED2625]'
+                      : ''
+                  }`
                 }
               >
                 {item.name}
@@ -110,7 +101,6 @@ export const Navbar = () => {
               </span>
             )}
 
-            {/* Desktop Dropdown */}
             {item.ServiceChildren && openDropdown === item.name && (
               <div className="absolute top-full left-0 lg:left-[-24em] lg:p-[3em] mt-1 lg:grid grid-cols-3 flex flex-col bg-white shadow-md rounded-[24px] z-50 p-2 min-w-[200px] lg:w-[700px] ">
                 {item.ServiceChildren.map((child, j) => (
@@ -138,11 +128,11 @@ export const Navbar = () => {
               {item.link ? (
                 <Link
                   to={item.link}
-                  className={`text-navColor text-[16px] font-[600] font-manRope hover:text-activeColor transition-all 
-                  
-                  ${item.name === 'Contact Us' ? 'bg-[#ED2625] text-white   py-3 px-3 text-center rounded-[8px] hover:text-white hover:bg-[#ED2625]' : ''}
-                  
-                  `}
+                  className={`text-navColor text-[16px] font-[600] font-manRope hover:text-activeColor transition-all ${
+                    item.name === 'Contact Us'
+                      ? 'bg-[#ED2625] text-white py-3 px-3 text-center rounded-[8px] hover:text-white hover:bg-[#ED2625]'
+                      : ''
+                  }`}
                   onClick={() => setNav(false)}
                 >
                   {item.name}
