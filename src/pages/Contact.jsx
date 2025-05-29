@@ -44,7 +44,7 @@ const Contact = () => {
               <span className="flex items-center justify-center h-[36px] w-[36px] rounded-full bg-[#ED2625] text-white text-[18px]">
                 <MdLocationOn />
               </span>
-              23 Harok Road, Rumuigbo, Port Harcourt
+              23 Harok Road, Rumigbo, Port Harcourt
             </li>
           </ul>
         </div>

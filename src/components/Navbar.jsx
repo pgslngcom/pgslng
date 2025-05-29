@@ -5,39 +5,10 @@ import nav2 from '../assets/navImg2.png';
 import nav3 from '../assets/navImg3.png';
 import nav4 from '../assets/navImg4.png';
 import nav5 from '../assets/navImg5.png';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 export const Navbar = () => {
-
-  // scrolling navbar display true and false 
-  const [scrollShow , setScrollshow] = useState(false);
-
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-  
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-  
-      if (currentScrollY < lastScrollY) {
-        // scrolling up
-        setScrollshow(true);
-      } else {
-        // scrolling down
-        setScrollshow(false);
-      }
-  
-      lastScrollY = currentScrollY;
-    };
-  
-    window.addEventListener('scroll', handleScroll);
-  
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-  
-
   const NavItems = [
     { name: 'Home', link: '/' },
     { name: 'About Us', link: '/about' },
@@ -64,12 +35,8 @@ export const Navbar = () => {
   };
 
   return (
-<header
-  className={`sticky top-0 w-full z-50 transition-transform duration-300 transform ${
-    scrollShow ? 'translate-y-0' : '-translate-y-full'
-  } bg-white md:flex justify-between items-center lg:h-[96px] h-[70px] px-[20px] py-[20px] md:px-[100px] md:py-[48px] shadow-lg`}
->
-          <span className="flex items-center justify-between w-full md:w-auto">
+    <header className="md:flex justify-between items-center lg:h-[96px] h-[70px] bg-white px-[20px] py-[20px] md:px-[100px] md:py-[48px] shadow-lg transition-all ease-in-out relative z-50">
+      <span className="flex items-center justify-between w-full md:w-auto">
         <Link to="/">
           <img src={Logo} className="w-[120px] md:w-[150px]" alt="logo" />
         </Link>
@@ -80,18 +47,14 @@ export const Navbar = () => {
       </span>
 
       {/* Desktop Navbar */}
-      <div className="hidden md:flex items-center gap-[30px] navbar">
+      <div className="hidden md:flex items-center gap-[30px]">
         {NavItems.map((item, i) => (
           <div key={i} className="relative">
             {item.link ? (
               <NavLink
                 to={item.link}
                 className={({ isActive }) =>
-                  
-                  `${isActive ? 'text-activeColor' : 'text-navColor'}
-                  text-[16px] font-[600] font-manRope hover:text-activeColor transition-all
-                  ${item.name === 'Contact Us' ? 'bg-[#ED2625] text-white py-3 px-5 rounded-[8px] hover:text-white hover:bg-[#ED2625]' : ''}
-                  `
+                  `${isActive ? 'text-activeColor' : 'text-navColor'} text-[16px] font-[600] font-manRope hover:text-activeColor transition-all`
                 }
               >
                 {item.name}
@@ -138,11 +101,7 @@ export const Navbar = () => {
               {item.link ? (
                 <Link
                   to={item.link}
-                  className={`text-navColor text-[16px] font-[600] font-manRope hover:text-activeColor transition-all 
-                  
-                  ${item.name === 'Contact Us' ? 'bg-[#ED2625] text-white   py-3 px-3 text-center rounded-[8px] hover:text-white hover:bg-[#ED2625]' : ''}
-                  
-                  `}
+                  className="text-navColor text-[16px] font-[600] font-manRope hover:text-activeColor transition-all"
                   onClick={() => setNav(false)}
                 >
                   {item.name}
@@ -161,7 +120,7 @@ export const Navbar = () => {
                     />
                   </span>
                   {item.ServiceChildren && openDropdown === item.name && (
-                    <div className="ml-4 flex flex-col gap-[16px] mt-2">
+                    <div className="ml-4 flex flex-col gap-1 mt-2">
                       {item.ServiceChildren.map((child, j) => (
                         <Link
                           key={j}
