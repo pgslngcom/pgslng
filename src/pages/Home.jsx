@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
-// import { FiChevronRight } from "react-icons/fi";
-// import { FiChevronLeft } from "react-icons/fi";
-// import { Navbar } from './components/Navbar';
+import { useEffect } from 'react'; 
 import { Footer } from '../components/Footer';
 import Carousel from 'react-slick';
 import Slider from 'react-slick';
@@ -88,7 +85,7 @@ function Home () {
               }}
             >
                 <div className=" text-center flex  flex-col md:w-[641px]">
-                  <h4 className="md:text-[60px] text-[40px] font-[700] text-white font-spaceGrotesk text-left md:leading-[80px] mb-[12px] leading-[55px]" data-aos="fade-up">
+                  <h4 className="md:text-[60px] text-[40px] font-[700] text-white font-spaceGrotesk text-left md:leading-[80px] mb-[12px] leading-[55px] pr-1" data-aos="fade-up">
                   {slide.title}
                   </h4>
                   <h6
@@ -123,13 +120,12 @@ function Home () {
         ))}
       </Slider>
     
- 
     {/* hero section ending */}
     
     {/* about section  */}
     <section className="about md:grid grid-cols-2 justify-center items-center  md:h-auto    overflow-hidden md:pl-[100px] pl-[30px] pr-[30px] pt-[100px] pb-[100px] bg-bgBackground" id='about'>
       <div className=" " data-aos="zoom-in" data-aos-delay="300">
-        <img src={AboutImg} className='' alt="" />
+        <img src={AboutImg} className='mb-5' alt="" />
       </div>
       <div className=" ">
         <div className=''>
@@ -163,24 +159,24 @@ function Home () {
 
 <Carousel {...settings}>
         {Services.map((service, i) => (
-          <div key={i} className="px-2" id="service">
+          <div key={i} className="px-2  " id="service">
             <a href={service.link} className="block relative h-[430px] rounded-[12px] overflow-hidden shadow-md group">
               {/* Image */}
               <img
                 src={service.serviceImg}
                 alt={service.text}
-                className="w-full h-full object-cover transform transition duration-500 group-hover:scale-105"
+                className="w-full h-full  object-cover  transform transition duration-500 group-hover:scale-105"
               />
 
               {/* Overlay Text */}
               <div
-                className="absolute bottom-0 left-0 w-full p-4 text-white"
+                className="absolute bottom-0 left-0 w-full p-4 text-white "
                 style={{
                   background: 'linear-gradient(1.98deg, rgba(2, 1, 1, 0.6) 66.76%, rgba(2, 1, 1, 0) 93.65%)',
                   backdropFilter: 'blur(6px)',
                 }}
               >
-                <h2 className="text-[22px] md:text-[26px] font-semibold font-manRope">
+                <h2 className="text-[22px] md:text-[26px] font-semibold font-manRope pl-4">
                   {service.text}
                 </h2>
               </div>
@@ -192,7 +188,7 @@ function Home () {
 
 
       {/* Project Image Gallery */}
-      <section className="py-10 px-4 md:px-[100px]">
+      <section className="pb-10 px-4 md:px-[100px] mt-10 lg:mt-0 md:mt-0">
         <h2 className="text-[28px] md:text-[38px] font-bold text-activeColor font-spaceGrotesk mb-[40px]">
           Project Gallery
         </h2>

@@ -39,10 +39,10 @@ export const Footer = () => {
             <FaEnvelope className="text-[18px]" /> info@pgslng.com
           </li>
           <li className="flex items-center gap-3 text-white font-manRope text-[14px] font-[400] mb-2">
-            <FaPhoneAlt className="text-[18px]" /> +234 806 023 6392 || +234 816 433 1909
+            <FaPhoneAlt className="text-[18px]" /> +234 806 023 6392 | +234 816 433 1909
           </li>
           <li className="flex items-start gap-3 text-white font-manRope text-[14px] font-[400]">
-            <MdLocationOn className="text-[18px] mt-1" /> 23 Harok Road, Rumigbo, Port Harcourt
+            <MdLocationOn className="text-[18px] mt-1" /> 23 Harok Road, Rumuigbo, Port Harcourt
           </li>
         </ul>
       </div>
